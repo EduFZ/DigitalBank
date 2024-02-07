@@ -1,6 +1,5 @@
 package br.com.finance.DigitalBank.entity;
 
-import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -9,23 +8,18 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.time.LocalDate;
+import java.math.BigDecimal;
 
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
-@Entity
-public class Client {
-
+public class Conta {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long idClient;
-    private Integer cpf;
-    private String name;
-    private LocalDate dataNasc;
-    private Endereco endereco;
-    private ClientCategory clientCategory;
-    private Conta conta;
-
+    private Long idConta;
+    private Integer agencia;
+    private Integer conta;
+    private BigDecimal saldo;
+    private Card card;
 }

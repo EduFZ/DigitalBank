@@ -1,6 +1,5 @@
 package br.com.finance.DigitalBank.entity;
 
-import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -15,17 +14,11 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @Getter
 @Setter
-@Entity
-public class Client {
-
+public class ApoliceSeguro {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long idClient;
-    private Integer cpf;
-    private String name;
-    private LocalDate dataNasc;
-    private Endereco endereco;
-    private ClientCategory clientCategory;
-    private Conta conta;
-
+    private Long idApolice;
+    private LocalDate dataContratacao;
+    private CreditCard creditCard;
+    private SeguroCard seguroCard;
 }
