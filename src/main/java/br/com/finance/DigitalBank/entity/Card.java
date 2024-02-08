@@ -1,8 +1,6 @@
 package br.com.finance.DigitalBank.entity;
 
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -14,6 +12,8 @@ import java.math.BigDecimal;
 @NoArgsConstructor
 @Getter
 @Setter
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@Entity
 public class Card {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

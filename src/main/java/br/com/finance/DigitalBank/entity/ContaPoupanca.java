@@ -11,6 +11,6 @@ import java.math.BigDecimal;
 @NoArgsConstructor
 @Getter
 @Setter
-public class ContaPoupanca {
+public class ContaPoupanca extends Conta{
     private BigDecimal rendimento;
 }

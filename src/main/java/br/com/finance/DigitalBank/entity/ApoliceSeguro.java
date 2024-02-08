@@ -1,8 +1,6 @@
 package br.com.finance.DigitalBank.entity;
 
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -14,6 +12,7 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @Getter
 @Setter
+
 public class ApoliceSeguro {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

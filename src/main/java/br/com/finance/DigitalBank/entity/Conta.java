@@ -1,19 +1,20 @@
 package br.com.finance.DigitalBank.entity;
 
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
+@Embeddable
+@Entity
 public class Conta {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -21,5 +22,6 @@ public class Conta {
     private Integer agencia;
     private Integer conta;
     private BigDecimal saldo;
-    private Card card;
+    @OneToMany(cascade = CascadeType.ALL)
+    private List<Card> card;
 }

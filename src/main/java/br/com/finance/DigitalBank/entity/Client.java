@@ -1,9 +1,6 @@
 package br.com.finance.DigitalBank.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -24,8 +21,13 @@ public class Client {
     private Integer cpf;
     private String name;
     private LocalDate dataNasc;
+    @ManyToOne
+    @JoinColumn(name = "id_endereco")
     private Endereco endereco;
+    @Enumerated(EnumType.STRING)
     private ClientCategory clientCategory;
+    @OneToOne
+    @JoinColumn(name = "id_conta")
     private Conta conta;
 
 }
