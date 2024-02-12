@@ -19,6 +19,8 @@ public class Conta {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idConta;
+    @ManyToOne
+    private Client nameClient;
     private Integer agencia;
     private Integer conta;
     private BigDecimal saldo;
