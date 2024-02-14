@@ -1,5 +1,6 @@
 package br.com.finance.DigitalBank.entity;
 
+import br.com.finance.DigitalBank.api.TaxaRendApi;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -18,10 +19,13 @@ public class ContaPoupanca extends Conta{
 
     public void taxaRendimento() {
         LocalDate today = LocalDate.now();
+        TaxaRendApi taxaRendApi = new TaxaRendApi();
+
+        rendimento = taxaRendApi.getTaxaCdi();
 
         if (dataRendimento == null || today.getMonthValue() != dataRendimento.getMonthValue()) {
             setSaldo(getSaldo().add(rendimento));
-            setDataRendimento(dataRendimento);
+            setDataRendimento(today);
         }
     }
 

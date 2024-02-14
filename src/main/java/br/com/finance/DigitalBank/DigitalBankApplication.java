@@ -1,5 +1,6 @@
 package br.com.finance.DigitalBank;
 
+import org.hibernate.annotations.processing.SQL;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 

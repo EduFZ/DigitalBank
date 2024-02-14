@@ -19,6 +19,7 @@ public class ContaCorrente extends Conta{
 
     public void cobrarTaxaMensal() {
         LocalDate today = LocalDate.now();
+        taxaMensal = BigDecimal.valueOf(12.0);
 
         if (dateCobranca == null || today.getMonthValue() != dateCobranca.getMonthValue()) {
             setSaldo(getSaldo().subtract(taxaMensal));
