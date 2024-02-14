@@ -18,7 +18,7 @@ public class Card {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idCard;
-    private Integer password;
+    private String password;
     private BigDecimal tax;
     private Boolean active;
 }

@@ -1,0 +1,1 @@
+INSERT INTO Card (idCard, password, tax, active) VALUES (1, '123456a', 12.0, true);
