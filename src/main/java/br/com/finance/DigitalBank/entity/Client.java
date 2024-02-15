@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -17,17 +18,15 @@ public class Client {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long idClient;
+    private Long id_client;
     private Integer cpf;
     private String name;
     private LocalDate dataNasc;
     @ManyToOne
-    @JoinColumn(name = "id_endereco")
     private Endereco endereco;
     @Enumerated(EnumType.STRING)
     private ClientCategory clientCategory;
-    @OneToOne
-    @JoinColumn(name = "id_conta")
-    private Conta conta;
+    @OneToMany(mappedBy = "client", cascade = CascadeType.ALL)
+    private List<Conta> conta;
 
 }

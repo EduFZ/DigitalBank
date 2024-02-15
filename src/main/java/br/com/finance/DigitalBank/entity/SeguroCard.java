@@ -1,6 +1,5 @@
 package br.com.finance.DigitalBank.entity;
 
-import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -18,7 +17,7 @@ import java.math.BigDecimal;
 public class SeguroCard {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long idSeguro;
+    private Long id;
     private BigDecimal valor;
     private String descricao;
 }

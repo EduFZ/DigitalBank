@@ -9,11 +9,11 @@ import java.math.BigDecimal;
 import java.util.List;
 
 public interface ContaRepository extends JpaRepository<Conta, Long> {
-    @Query("SELECT c.saldo FROM Conta c WHERE c.idConta = :idConta")
-    BigDecimal findSaldoById(@Param("idConta")Long idConta);
+    @Query("SELECT c.saldo FROM Conta c WHERE c.id_conta = :id_conta")
+    BigDecimal findSaldoById(@Param("id_conta")Long id_conta);
 
-    @Query("SELECT c FROM Conta c WHERE c.idConta = :idConta")
-    Conta findContaById(@Param("idConta")Long idConta);
+    @Query("SELECT c FROM Conta c WHERE c.id_conta = :id_conta")
+    Conta findContaById(@Param("id_conta")Long id_conta);
 
 
 

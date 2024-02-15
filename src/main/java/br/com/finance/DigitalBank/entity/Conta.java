@@ -13,17 +13,17 @@ import java.util.List;
 @NoArgsConstructor
 @Getter
 @Setter
-@Embeddable
 @Entity
 public class Conta {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long idConta;
+    private Long id_conta;
     @ManyToOne
-    private Client nameClient;
+    @JoinColumn(name = "id_client")
+    private Client client;
     private Integer agencia;
     private Integer conta;
     private BigDecimal saldo;
-    @OneToMany(cascade = CascadeType.ALL)
-    private List<Card> card;
+    @OneToMany(mappedBy ="conta", cascade = CascadeType.ALL)
+    private List<Card> cards;
 }

@@ -14,7 +14,7 @@ import lombok.Setter;
 public class Endereco {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long idEndereco;
+    private Long id;
     private String logradouro;
     private Integer numero;
     private String cidade;

@@ -17,9 +17,11 @@ import java.math.BigDecimal;
 public class Card {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_card")
-    private Long idCard;
+    private Long id_card;
     private String password;
     private BigDecimal tax;
     private Boolean active;
+    @ManyToOne
+    @JoinColumn(name = "id_conta")
+    private Conta conta;
 }
