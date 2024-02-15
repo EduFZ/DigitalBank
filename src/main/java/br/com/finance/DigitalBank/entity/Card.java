@@ -12,11 +12,12 @@ import java.math.BigDecimal;
 @NoArgsConstructor
 @Getter
 @Setter
-@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@Inheritance(strategy = InheritanceType.JOINED)
 @Entity
 public class Card {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_card")
     private Long idCard;
     private String password;
     private BigDecimal tax;
