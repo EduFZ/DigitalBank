@@ -19,14 +19,17 @@ public class Client {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id_client;
-    private Integer cpf;
+    private Long cpf;
     private String name;
+    @Column(name = "data_nasc")
     private LocalDate dataNasc;
+    @JoinColumn(name = "id_endereco")
     @ManyToOne
     private Endereco endereco;
     @Enumerated(EnumType.STRING)
+    @Column(name = "client_category")
     private ClientCategory clientCategory;
-    @OneToMany(mappedBy = "client", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "client")
     private List<Conta> conta;
 
 }

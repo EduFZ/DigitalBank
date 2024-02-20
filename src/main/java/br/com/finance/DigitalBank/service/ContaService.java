@@ -13,7 +13,7 @@ public class ContaService {
     ContaRepository contaRepository;
 
     public BigDecimal getSaldo(Long idConta) {
-        return contaRepository.findSaldoById(idConta);
+        return contaRepository.findContaById(idConta).getSaldo();
     }
 
     public void transferenciaPix(Long idOrigem, Long idDestino, BigDecimal valor) {

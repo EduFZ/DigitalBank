@@ -14,6 +14,7 @@ import java.util.List;
 @Getter
 @Setter
 @Entity
+@Inheritance(strategy = InheritanceType.JOINED)
 public class Conta {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

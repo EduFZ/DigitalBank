@@ -1,5 +1,8 @@
 package br.com.finance.DigitalBank.entity;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -12,8 +15,12 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @Getter
 @Setter
+@Entity
+@Table(name = "Conta_Corrente")
 public class ContaCorrente extends Conta{
+    @Column(name = "taxa_mensal")
     private BigDecimal taxaMensal;
+    @Column(name = "date_cobranca")
     private LocalDate dateCobranca;
 
 

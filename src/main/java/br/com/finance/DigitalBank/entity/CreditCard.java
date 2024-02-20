@@ -14,7 +14,8 @@ import java.math.BigDecimal;
 @Getter
 @Setter
 @Entity
+@Table(name = "Credit_Card")
 public class CreditCard extends Card{
-
+    @Column(name = "credit_limit")
     private BigDecimal creditLimit;
 }
