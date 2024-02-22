@@ -1,5 +1,7 @@
 package br.com.finance.DigitalBank.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -26,5 +28,6 @@ public class Conta {
     private Integer conta;
     private BigDecimal saldo;
     @OneToMany(mappedBy ="conta", cascade = CascadeType.ALL)
+    @JsonManagedReference // Ignora a serialização da conta ao serializar um cartão evitando recursão infinita
     private List<Card> cards;
 }
