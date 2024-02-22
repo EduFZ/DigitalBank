@@ -23,7 +23,7 @@ public class CardService {
     public Card alterarSenha (Long id, Card card) {
         Card newSenha = cardRepository.findCardById(id);
         newSenha.setPassword((card.getPassword()));
-        return newSenha;
+        return cardRepository.save(newSenha);
     }
 
 }
