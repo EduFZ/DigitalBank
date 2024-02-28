@@ -2,6 +2,7 @@ package br.com.finance.DigitalBank.controller;
 
 import br.com.finance.DigitalBank.dto.CardDto;
 import br.com.finance.DigitalBank.entity.Card;
+import br.com.finance.DigitalBank.exception.ExceptionMessage;
 import br.com.finance.DigitalBank.service.CardService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -28,7 +29,7 @@ public class CardController {
     }
 
     @PutMapping("/replace/{id}")
-    public ResponseEntity<CardDto> alterarSenha (@PathVariable Long id, @RequestBody Card card) {
+    public ResponseEntity<CardDto> alterarSenha (@PathVariable Long id, @RequestBody Card card) throws ExceptionMessage {
         return new ResponseEntity<>(cardService.alterarSenha(id, card), HttpStatus.CREATED);
     }
 

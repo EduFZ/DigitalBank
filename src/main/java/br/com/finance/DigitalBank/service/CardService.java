@@ -2,7 +2,9 @@ package br.com.finance.DigitalBank.service;
 
 import br.com.finance.DigitalBank.dto.CardDto;
 import br.com.finance.DigitalBank.entity.Card;
+import br.com.finance.DigitalBank.exception.ExceptionMessage;
 import br.com.finance.DigitalBank.repository.CardRepository;
+import br.com.finance.DigitalBank.validation.RepeatPasswordValidation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,6 +15,9 @@ import java.util.stream.Collectors;
 public class CardService {
     @Autowired
     private CardRepository cardRepository;
+
+    @Autowired
+    private RepeatPasswordValidation repeatPasswordValidation;
 
     public List<CardDto> findAllCard() {
 
@@ -32,11 +37,14 @@ public class CardService {
 
     }
 
-    public CardDto alterarSenha (Long id, Card card) {
+    public CardDto alterarSenha (Long id, Card card) throws ExceptionMessage {
         Card card1 = cardRepository.findCardById(id);
-        card1.setPassword(card.getPassword());
-        cardRepository.save(card1);
-
+        if (repeatPasswordValidation.repeatPasswordValidation(id, card.getPassword())){
+            throw new ExceptionMessage("A senha é a mesma que a anterior");
+        }else {
+            card1.setPassword(card.getPassword());
+            cardRepository.save(card1);
+        }
         return CardDto.convertCardToDto(card1);
     }
 
