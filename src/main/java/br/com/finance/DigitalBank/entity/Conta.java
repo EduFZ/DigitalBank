@@ -28,6 +28,6 @@ public class Conta {
     private Integer conta;
     private BigDecimal saldo;
     @OneToMany(mappedBy ="conta", cascade = CascadeType.ALL)
-    @JsonManagedReference // Ignora a serialização da conta ao serializar um cartão evitando recursão infinita
+    //@JsonManagedReference // Ignora a serialização da conta ao serializar um cartão evitando recursão infinita
     private List<Card> cards;
 }

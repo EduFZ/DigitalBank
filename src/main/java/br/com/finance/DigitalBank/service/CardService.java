@@ -1,29 +1,43 @@
 package br.com.finance.DigitalBank.service;
 
+import br.com.finance.DigitalBank.dto.CardDto;
 import br.com.finance.DigitalBank.entity.Card;
 import br.com.finance.DigitalBank.repository.CardRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class CardService {
     @Autowired
     private CardRepository cardRepository;
 
-    public List<Card> findAllCard() {
-        return cardRepository.findAllCard();
+    public List<CardDto> findAllCard() {
+
+        List<Card> card = cardRepository.findAllCard();
+
+        return card.stream().map(CardDto::convertCardToDto)
+                .collect(Collectors.toList());
+
     }
 
-    public Card findCardById(Long id) {
-        return cardRepository.findCardById(id);
+    public CardDto findCardById(Long id) {
+        Card card = cardRepository.findCardById(id);
+
+        CardDto cardDto = CardDto.convertCardToDto(card);
+
+        return cardDto;
+
     }
 
-    public Card alterarSenha (Long id, Card card) {
-        Card newSenha = cardRepository.findCardById(id);
-        newSenha.setPassword((card.getPassword()));
-        return cardRepository.save(newSenha);
+    public CardDto alterarSenha (Long id, Card card) {
+        Card card1 = cardRepository.findCardById(id);
+        card1.setPassword(card.getPassword());
+        cardRepository.save(card1);
+
+        return CardDto.convertCardToDto(card1);
     }
 
 }

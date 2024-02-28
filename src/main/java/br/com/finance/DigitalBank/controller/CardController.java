@@ -1,5 +1,6 @@
 package br.com.finance.DigitalBank.controller;
 
+import br.com.finance.DigitalBank.dto.CardDto;
 import br.com.finance.DigitalBank.entity.Card;
 import br.com.finance.DigitalBank.service.CardService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,17 +18,17 @@ public class CardController {
 
 
     @GetMapping("/all")
-    public ResponseEntity<List<Card>> findAllCard(){
+    public ResponseEntity<List<CardDto>> findAllCard(){
         return ResponseEntity.ok(cardService.findAllCard());
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Card> findCardById(@PathVariable Long id) {
+    public ResponseEntity<CardDto> findCardById(@PathVariable Long id) {
         return ResponseEntity.ok(cardService.findCardById(id));
     }
 
     @PutMapping("/replace/{id}")
-    public ResponseEntity<Card> alterarSenha (@PathVariable Long id, @RequestBody Card card) {
+    public ResponseEntity<CardDto> alterarSenha (@PathVariable Long id, @RequestBody Card card) {
         return new ResponseEntity<>(cardService.alterarSenha(id, card), HttpStatus.CREATED);
     }
 
