@@ -4,6 +4,7 @@ import br.com.finance.DigitalBank.dto.CardDto;
 import br.com.finance.DigitalBank.entity.Card;
 import br.com.finance.DigitalBank.exception.ExceptionMessage;
 import br.com.finance.DigitalBank.repository.CardRepository;
+import br.com.finance.DigitalBank.validation.PasswordDigitsValidation;
 import br.com.finance.DigitalBank.validation.RepeatPasswordValidation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,9 +16,10 @@ import java.util.stream.Collectors;
 public class CardService {
     @Autowired
     private CardRepository cardRepository;
-
     @Autowired
     private RepeatPasswordValidation repeatPasswordValidation;
+    @Autowired
+    private PasswordDigitsValidation passwordDigitsValidation;
 
     public List<CardDto> findAllCard() {
 
@@ -41,7 +43,9 @@ public class CardService {
         Card card1 = cardRepository.findCardById(id);
         if (repeatPasswordValidation.repeatPasswordValidation(id, card.getPassword())){
             throw new ExceptionMessage("A senha é a mesma que a anterior");
-        }else {
+        } else if (passwordDigitsValidation.passwordDigitsValidation(card.getPassword())) {
+            throw new ExceptionMessage("A senha deve conter 8 dígitos ou mais");
+        } else {
             card1.setPassword(card.getPassword());
             cardRepository.save(card1);
         }
