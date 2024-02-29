@@ -18,4 +18,5 @@ import java.math.BigDecimal;
 public class CreditCard extends Card{
     @Column(name = "credit_limit")
     private BigDecimal creditLimit;
+    private BigDecimal fatura;
 }

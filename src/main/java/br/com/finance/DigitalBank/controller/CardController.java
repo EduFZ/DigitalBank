@@ -28,6 +28,11 @@ public class CardController {
         return ResponseEntity.ok(cardService.findCardById(id));
     }
 
+    @PostMapping("/save")
+    public ResponseEntity<CardDto> save(@RequestBody Card card) throws ExceptionMessage {
+        return new ResponseEntity<>(cardService.saveCard(card), HttpStatus.CREATED);
+    }
+
     @PutMapping("/replace/{id}")
     public ResponseEntity<CardDto> alterarSenha (@PathVariable Long id, @RequestBody Card card) throws ExceptionMessage {
         return new ResponseEntity<>(cardService.alterarSenha(id, card), HttpStatus.CREATED);

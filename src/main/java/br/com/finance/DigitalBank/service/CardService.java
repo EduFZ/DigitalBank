@@ -39,6 +39,15 @@ public class CardService {
 
     }
 
+    public CardDto saveCard (Card card) throws ExceptionMessage {
+        if (passwordDigitsValidation.passwordDigitsValidation(card.getPassword())) {
+            throw new ExceptionMessage("A senha deve conter 8 dígitos ou mais");
+        } else {
+            cardRepository.save(card);
+        }
+        return CardDto.convertCardToDto(card);
+    }
+
     public CardDto alterarSenha (Long id, Card card) throws ExceptionMessage {
         Card card1 = cardRepository.findCardById(id);
         if (repeatPasswordValidation.repeatPasswordValidation(id, card.getPassword())){
