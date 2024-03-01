@@ -30,4 +30,32 @@ public class Conta {
     @OneToMany(mappedBy ="conta", cascade = CascadeType.ALL)
     //@JsonManagedReference // Ignora a serialização da conta ao serializar um cartão evitando recursão infinita
     private List<Card> cards;
+
+
+    public CreditCard gerarCreditCard (String password, BigDecimal tax, Boolean active, BigDecimal creditLimit, BigDecimal fatura){
+        CreditCard creditCard = new CreditCard();
+
+        creditCard.setPassword(password);
+        creditCard.setTax(tax);
+        creditCard.setActive(active);
+        creditCard.setConta(this);
+        creditCard.setCreditLimit(creditLimit);
+        creditCard.setFatura(fatura);
+
+        return creditCard;
+    }
+
+    public DebitCard gerarDebitCard (String password, BigDecimal tax, Boolean active, BigDecimal dailyLimit){
+        DebitCard debitCard = new DebitCard();
+
+        debitCard.setPassword(password);
+        debitCard.setTax(tax);
+        debitCard.setActive(active);
+        debitCard.setConta(this);
+        debitCard.setDailyLimit(dailyLimit);
+
+        return debitCard;
+    }
+
+
 }
