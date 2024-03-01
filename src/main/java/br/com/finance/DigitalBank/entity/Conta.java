@@ -1,7 +1,5 @@
 package br.com.finance.DigitalBank.entity;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -32,7 +30,7 @@ public class Conta {
     private List<Card> cards;
 
 
-    public CreditCard gerarCreditCard (String password, BigDecimal tax, Boolean active, BigDecimal creditLimit, BigDecimal fatura){
+    public CreditCard generateCreditCard(String password, BigDecimal tax, Boolean active, BigDecimal creditLimit, BigDecimal fatura){
         CreditCard creditCard = new CreditCard();
 
         creditCard.setPassword(password);
@@ -45,7 +43,7 @@ public class Conta {
         return creditCard;
     }
 
-    public DebitCard gerarDebitCard (String password, BigDecimal tax, Boolean active, BigDecimal dailyLimit){
+    public DebitCard generateDebitCard(String password, BigDecimal tax, Boolean active, BigDecimal dailyLimit){
         DebitCard debitCard = new DebitCard();
 
         debitCard.setPassword(password);
