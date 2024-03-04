@@ -61,4 +61,24 @@ public class CardService {
         return CardDto.convertCardToDto(card1);
     }
 
+    public CardDto desativarCard (Long id) throws ExceptionMessage {
+        Card card1 = cardRepository.findCardById(id);
+        if (card1.getActive().equals(true)){
+            card1.setActive(false);
+        }else {
+            throw new ExceptionMessage("Cartão já desativado");
+        }
+        return CardDto.convertCardToDto(card1);
+    }
+
+    public CardDto ativarCard (Long id) throws ExceptionMessage {
+        Card card1 = cardRepository.findCardById(id);
+        if (card1.getActive().equals(false)){
+            card1.setActive(true);
+        }else {
+            throw new ExceptionMessage("Cartão já ativado");
+        }
+        return CardDto.convertCardToDto(card1);
+    }
+
 }

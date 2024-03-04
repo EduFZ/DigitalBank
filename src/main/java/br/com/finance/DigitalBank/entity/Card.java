@@ -1,5 +1,6 @@
 package br.com.finance.DigitalBank.entity;
 
+import br.com.finance.DigitalBank.exception.ExceptionMessage;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
@@ -27,5 +28,6 @@ public class Card {
     @JoinColumn(name = "id_conta")
     //@JsonBackReference // Ignora a serialização da conta ao serializar um cartão evitando recursão infinita
     private Conta conta;
+
 
 }

@@ -38,5 +38,15 @@ public class CardController {
         return new ResponseEntity<>(cardService.alterarSenha(id, card), HttpStatus.CREATED);
     }
 
+    @PutMapping("/desativarCard")
+    public ResponseEntity<CardDto> desativarCard(@PathVariable Long id) throws ExceptionMessage {
+        return new ResponseEntity<>(cardService.desativarCard(id), HttpStatus.CREATED);
+    }
+
+    @PutMapping("/ativarCard")
+    public ResponseEntity<CardDto> ativarCard(@PathVariable Long id) throws ExceptionMessage {
+        return new ResponseEntity<>(cardService.ativarCard(id), HttpStatus.CREATED);
+    }
+
 
 }

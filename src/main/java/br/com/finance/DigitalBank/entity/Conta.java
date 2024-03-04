@@ -30,6 +30,8 @@ public class Conta {
     private List<Card> cards;
 
 
+
+
     public CreditCard generateCreditCard(String password, BigDecimal tax, Boolean active, BigDecimal creditLimit, BigDecimal fatura){
         CreditCard creditCard = new CreditCard();
 
