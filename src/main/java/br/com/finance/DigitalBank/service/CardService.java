@@ -2,6 +2,9 @@ package br.com.finance.DigitalBank.service;
 
 import br.com.finance.DigitalBank.dto.CardDto;
 import br.com.finance.DigitalBank.entity.Card;
+import br.com.finance.DigitalBank.entity.Conta;
+import br.com.finance.DigitalBank.entity.CreditCard;
+import br.com.finance.DigitalBank.entity.DebitCard;
 import br.com.finance.DigitalBank.exception.ExceptionMessage;
 import br.com.finance.DigitalBank.repository.CardRepository;
 import br.com.finance.DigitalBank.validation.PasswordDigitsValidation;
@@ -9,6 +12,7 @@ import br.com.finance.DigitalBank.validation.RepeatPasswordValidation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -79,6 +83,21 @@ public class CardService {
             throw new ExceptionMessage("Cartão já ativado");
         }
         return CardDto.convertCardToDto(card1);
+    }
+
+    public CreditCard payCreditCard (Long id, BigDecimal value) {
+        CreditCard card = (CreditCard) cardRepository.findCardById(id);
+        card.setFatura(card.getFatura().add(value));
+        card.setCreditLimit(card.getCreditLimit().subtract(value));
+
+        return card;
+    }
+
+    public DebitCard payDebitCard (Long id, BigDecimal value) {
+        DebitCard card = (DebitCard) cardRepository.findCardById(id);
+        card.setDailyLimit(card.getDailyLimit().subtract(value));
+
+        return card;
     }
 
 }
