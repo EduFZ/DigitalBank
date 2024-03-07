@@ -7,6 +7,7 @@ import br.com.finance.DigitalBank.entity.CreditCard;
 import br.com.finance.DigitalBank.entity.DebitCard;
 import br.com.finance.DigitalBank.exception.ExceptionMessage;
 import br.com.finance.DigitalBank.repository.CardRepository;
+import br.com.finance.DigitalBank.repository.ContaRepository;
 import br.com.finance.DigitalBank.validation.PasswordDigitsValidation;
 import br.com.finance.DigitalBank.validation.RepeatPasswordValidation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +21,8 @@ import java.util.stream.Collectors;
 public class CardService {
     @Autowired
     private CardRepository cardRepository;
+    @Autowired
+    private ContaRepository contaRepository;
     @Autowired
     private RepeatPasswordValidation repeatPasswordValidation;
     @Autowired
@@ -87,28 +90,29 @@ public class CardService {
 
     public CreditCard payCreditCard (Long id, BigDecimal value) throws ExceptionMessage {
         CreditCard card = (CreditCard) cardRepository.findCardById(id);
-        Conta conta = card.getConta();
 
-        if (conta.getSaldo().compareTo(value) < 0){
-            throw new ExceptionMessage("Sem saldo suficiente!");
+        if (card.getCreditLimit().compareTo(value) < 0){
+            throw new ExceptionMessage("Limite excedido!");
         }else {
             card.setFatura(card.getFatura().add(value));
             card.setCreditLimit(card.getCreditLimit().subtract(value));
+            cardRepository.save(card);
         }
         return card;
-
     }
 
     public DebitCard payDebitCard (Long id, BigDecimal value) throws ExceptionMessage {
         DebitCard card = (DebitCard) cardRepository.findCardById(id);
         Conta conta = card.getConta();
+
         if (conta.getSaldo().compareTo(value) < 0){
             throw new ExceptionMessage("Sem saldo suficiente!");
         }else {
             card.setDailyLimit(card.getDailyLimit().subtract(value));
             conta.setSaldo(conta.getSaldo().subtract(value));
+            cardRepository.save(card);
+            contaRepository.save(conta);
         }
-
         return card;
     }
 

@@ -2,6 +2,8 @@ package br.com.finance.DigitalBank.controller;
 
 import br.com.finance.DigitalBank.dto.CardDto;
 import br.com.finance.DigitalBank.entity.Card;
+import br.com.finance.DigitalBank.entity.CreditCard;
+import br.com.finance.DigitalBank.entity.DebitCard;
 import br.com.finance.DigitalBank.exception.ExceptionMessage;
 import br.com.finance.DigitalBank.service.CardService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +11,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 @RestController
@@ -46,6 +49,16 @@ public class CardController {
     @PutMapping("/ativarCard")
     public ResponseEntity<CardDto> ativarCard(@PathVariable Long id) throws ExceptionMessage {
         return new ResponseEntity<>(cardService.ativarCard(id), HttpStatus.CREATED);
+    }
+
+    @PutMapping("/payCreditCard/{id}")
+    public ResponseEntity<CreditCard> payCreditCard(@PathVariable Long id, @RequestParam BigDecimal value) throws ExceptionMessage {
+        return ResponseEntity.ok(cardService.payCreditCard(id, value));
+    }
+
+    @PutMapping("/payDebitCard/{id}")
+    public ResponseEntity<DebitCard> payDebitCard(@PathVariable Long id, @RequestParam BigDecimal value) throws ExceptionMessage {
+        return ResponseEntity.ok(cardService.payDebitCard(id, value));
     }
 
 
