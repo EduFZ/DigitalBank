@@ -85,17 +85,29 @@ public class CardService {
         return CardDto.convertCardToDto(card1);
     }
 
-    public CreditCard payCreditCard (Long id, BigDecimal value) {
+    public CreditCard payCreditCard (Long id, BigDecimal value) throws ExceptionMessage {
         CreditCard card = (CreditCard) cardRepository.findCardById(id);
-        card.setFatura(card.getFatura().add(value));
-        card.setCreditLimit(card.getCreditLimit().subtract(value));
+        Conta conta = card.getConta();
 
+        if (conta.getSaldo().compareTo(value) < 0){
+            throw new ExceptionMessage("Sem saldo suficiente!");
+        }else {
+            card.setFatura(card.getFatura().add(value));
+            card.setCreditLimit(card.getCreditLimit().subtract(value));
+        }
         return card;
+
     }
 
-    public DebitCard payDebitCard (Long id, BigDecimal value) {
+    public DebitCard payDebitCard (Long id, BigDecimal value) throws ExceptionMessage {
         DebitCard card = (DebitCard) cardRepository.findCardById(id);
-        card.setDailyLimit(card.getDailyLimit().subtract(value));
+        Conta conta = card.getConta();
+        if (conta.getSaldo().compareTo(value) < 0){
+            throw new ExceptionMessage("Sem saldo suficiente!");
+        }else {
+            card.setDailyLimit(card.getDailyLimit().subtract(value));
+            conta.setSaldo(conta.getSaldo().subtract(value));
+        }
 
         return card;
     }
