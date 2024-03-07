@@ -1,6 +1,8 @@
 package br.com.finance.DigitalBank.entity;
 
 import br.com.finance.DigitalBank.api.TaxaRendApi;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -13,6 +15,8 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @Getter
 @Setter
+@Entity
+@Table(name = "Conta_Poupanca")
 public class ContaPoupanca extends Conta{
     private BigDecimal rendimento;
     private LocalDate dataRendimento;
