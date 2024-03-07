@@ -51,6 +51,11 @@ public class CardController {
         return new ResponseEntity<>(cardService.ativarCard(id), HttpStatus.CREATED);
     }
 
+    @PutMapping("replaceDayLimit/{id}")
+    public ResponseEntity<DebitCard> changeDayLimits (@PathVariable Long id, BigDecimal limit) {
+        return new ResponseEntity<>(cardService.changeDayLimits(id, limit), HttpStatus.CREATED);
+    }
+
     @PutMapping("/payCreditCard/{id}")
     public ResponseEntity<CreditCard> payCreditCard(@PathVariable Long id, @RequestParam BigDecimal value) throws ExceptionMessage {
         return ResponseEntity.ok(cardService.payCreditCard(id, value));

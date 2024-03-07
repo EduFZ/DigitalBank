@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -18,4 +19,15 @@ public class CreditCard extends Card{
     @Column(name = "credit_limit")
     private BigDecimal creditLimit;
     private BigDecimal fatura;
+    private LocalDate vencMes;
+
+
+    public void resetLimitMonth() {
+        LocalDate today = LocalDate.now();
+        if (getVencMes() == null || getVencMes().getMonth() != today.getMonth()) {
+            setCreditLimit(BigDecimal.ZERO);
+            setVencMes(today);
+        }
+    }
+
 }

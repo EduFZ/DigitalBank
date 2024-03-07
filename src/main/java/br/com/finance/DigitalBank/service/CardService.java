@@ -72,6 +72,7 @@ public class CardService {
         Card card1 = cardRepository.findCardById(id);
         if (card1.getActive().equals(true)){
             card1.setActive(false);
+            cardRepository.save(card1);
         }else {
             throw new ExceptionMessage("Cartão já desativado");
         }
@@ -82,14 +83,22 @@ public class CardService {
         Card card1 = cardRepository.findCardById(id);
         if (card1.getActive().equals(false)){
             card1.setActive(true);
+            cardRepository.save(card1);
         }else {
             throw new ExceptionMessage("Cartão já ativado");
         }
         return CardDto.convertCardToDto(card1);
     }
 
+    public DebitCard changeDayLimits (Long id, BigDecimal limit) {
+        DebitCard debitCard = (DebitCard) cardRepository.findCardById(id);
+        debitCard.setDailyLimit(limit);
+        return cardRepository.save(debitCard);
+    }
+
     public CreditCard payCreditCard (Long id, BigDecimal value) throws ExceptionMessage {
         CreditCard card = (CreditCard) cardRepository.findCardById(id);
+        card.resetLimitMonth();
 
         if (card.getCreditLimit().compareTo(value) < 0){
             throw new ExceptionMessage("Limite excedido!");
@@ -103,6 +112,7 @@ public class CardService {
 
     public DebitCard payDebitCard (Long id, BigDecimal value) throws ExceptionMessage {
         DebitCard card = (DebitCard) cardRepository.findCardById(id);
+        card.resetDailyLimit();
         Conta conta = card.getConta();
 
         if (conta.getSaldo().compareTo(value) < 0){
