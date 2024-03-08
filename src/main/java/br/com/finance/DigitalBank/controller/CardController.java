@@ -51,7 +51,7 @@ public class CardController {
         return new ResponseEntity<>(cardService.ativarCard(id), HttpStatus.CREATED);
     }
 
-    @PutMapping("replaceDayLimit/{id}")
+    @PutMapping("/replaceDayLimit/{id}")
     public ResponseEntity<DebitCard> changeDayLimits (@PathVariable Long id, BigDecimal limit) {
         return new ResponseEntity<>(cardService.changeDayLimits(id, limit), HttpStatus.CREATED);
     }

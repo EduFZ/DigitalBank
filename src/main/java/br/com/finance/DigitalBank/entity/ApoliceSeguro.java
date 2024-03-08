@@ -18,6 +18,7 @@ public class ApoliceSeguro {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idApolice;
     private LocalDate dataContratacao;
+    private Long numeroApolice;
     @OneToOne
     @JoinColumn(name ="id_credit_card", referencedColumnName = "id_card")
     private CreditCard creditCard;

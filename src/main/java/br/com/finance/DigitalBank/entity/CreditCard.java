@@ -22,6 +22,8 @@ public class CreditCard extends Card{
     private LocalDate vencMes;
     @OneToOne(mappedBy = "creditCard")
     private ApoliceSeguro apoliceSeguro;
+    @OneToOne(mappedBy = "credit_card")
+    private SeguroCard seguroCard;
 
 
     public void resetLimitMonth() {
