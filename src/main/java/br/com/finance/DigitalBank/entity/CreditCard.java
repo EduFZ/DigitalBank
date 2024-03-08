@@ -20,6 +20,8 @@ public class CreditCard extends Card{
     private BigDecimal creditLimit;
     private BigDecimal fatura;
     private LocalDate vencMes;
+    @OneToOne(mappedBy = "creditCard")
+    private ApoliceSeguro apoliceSeguro;
 
 
     public void resetLimitMonth() {
