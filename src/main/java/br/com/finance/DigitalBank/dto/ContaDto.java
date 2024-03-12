@@ -27,7 +27,6 @@ public class ContaDto {
     private Integer agencia;
     private Integer conta;
     private BigDecimal saldo;
-    @JsonIgnore
     private List<Card> cards;
 
 

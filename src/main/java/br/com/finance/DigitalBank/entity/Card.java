@@ -26,7 +26,7 @@ public class Card {
     private Boolean active;
     @ManyToOne
     @JoinColumn(name = "id_conta")
-    //@JsonBackReference // Ignora a serialização da conta ao serializar um cartão evitando recursão infinita
+    @JsonBackReference // Ignora a serialização da conta ao serializar um cartão evitando recursão infinita
     private Conta conta;
 
 
