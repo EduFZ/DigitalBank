@@ -22,7 +22,6 @@ import java.util.List;
 public class ContaDto {
 
     private Long id_conta;
-    @JsonIgnore
     private Client client;
     private Integer agencia;
     private Integer conta;

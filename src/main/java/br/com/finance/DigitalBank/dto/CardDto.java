@@ -4,6 +4,7 @@ import br.com.finance.DigitalBank.entity.Card;
 import br.com.finance.DigitalBank.entity.Conta;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -22,7 +23,6 @@ public class CardDto {
     private String password;
     private BigDecimal tax;
     private Boolean active;
-    @JsonBackReference
     private Conta conta;
 
 

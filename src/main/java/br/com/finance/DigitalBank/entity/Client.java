@@ -1,5 +1,6 @@
 package br.com.finance.DigitalBank.entity;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -30,6 +31,7 @@ public class Client {
     @Column(name = "client_category")
     private ClientCategory clientCategory;
     @OneToMany(mappedBy = "client")
+    @JsonManagedReference
     private List<Conta> conta;
 
 }

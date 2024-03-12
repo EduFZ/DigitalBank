@@ -1,5 +1,6 @@
 package br.com.finance.DigitalBank.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -22,6 +23,7 @@ public class Conta {
     private Long id_conta;
     @ManyToOne
     @JoinColumn(name = "id_client")
+    @JsonBackReference
     private Client client;
     private Integer agencia;
     private Integer conta;
