@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -24,4 +25,5 @@ public class SeguroCard {
     private ApoliceSeguro apoliceSeguro;
     @OneToOne
     private CreditCard credit_card;
+    private LocalDate dataContrat;
 }
