@@ -52,7 +52,7 @@ public class CardController {
     }
 
     @PutMapping("/replaceDayLimit/{id}")
-    public ResponseEntity<DebitCard> changeDayLimits (@PathVariable Long id, BigDecimal limit) {
+    public ResponseEntity<DebitCard> changeDayLimits (@PathVariable Long id, @RequestBody BigDecimal limit) {
         return new ResponseEntity<>(cardService.changeDayLimits(id, limit), HttpStatus.CREATED);
     }
 
