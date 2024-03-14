@@ -66,19 +66,29 @@ public class CardService {
     }
 
     public CreditCard generateCreditCard (CreditCard creditCard) throws ExceptionMessage{
-        if (passwordDigitsValidation.passwordDigitsValidation(creditCard.getPassword())) {
-            throw new ExceptionMessage("A senha deve conter 8 dígitos ou mais");
+        if (creditCard.getConta().equals(true)) {
+            if (passwordDigitsValidation.passwordDigitsValidation(creditCard.getPassword())) {
+                throw new ExceptionMessage("A senha deve conter 8 dígitos ou mais");
+            } else {
+                return cardRepository.save(creditCard);
+            }
         } else {
-           return cardRepository.save(creditCard);
+            new ExceptionMessage("Nenhuma conta encontrada");
         }
+        return creditCard;
     }
 
     public DebitCard generateDebitCard (DebitCard debitCard) throws ExceptionMessage{
-        if (passwordDigitsValidation.passwordDigitsValidation(debitCard.getPassword())) {
-            throw new ExceptionMessage("A senha deve conter 8 dígitos ou mais");
+        if (debitCard.getConta().equals(true)) {
+            if (passwordDigitsValidation.passwordDigitsValidation(debitCard.getPassword())) {
+                throw new ExceptionMessage("A senha deve conter 8 dígitos ou mais");
+            } else {
+                return cardRepository.save(debitCard);
+            }
         } else {
-            return cardRepository.save(debitCard);
+            new ExceptionMessage("Nenhuma conta encontrada");
         }
+        return debitCard;
     }
 
     public CardDto alterarSenha (Long id, Card card) throws ExceptionMessage {

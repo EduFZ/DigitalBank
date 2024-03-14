@@ -41,7 +41,7 @@ public class SeguroCardService {
         seguroCard.setCredit_card(creditCard);
 
         ApoliceSeguro apoliceSeguro = new ApoliceSeguro();
-        apoliceSeguro.setDataContratacao(LocalDate.now());
+        apoliceSeguro.setDataContratacao(seguroCard.getDataContrat());
         apoliceSeguro.setCreditCard(creditCard);
         apoliceSeguro.setNumeroApolice((long) Math.pow(10, 10));
 
