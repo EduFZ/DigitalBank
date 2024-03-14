@@ -1,6 +1,7 @@
 package br.com.finance.DigitalBank.controller;
 
 import br.com.finance.DigitalBank.dto.CardDto;
+import br.com.finance.DigitalBank.dto.CreditCardDto;
 import br.com.finance.DigitalBank.entity.Card;
 import br.com.finance.DigitalBank.entity.CreditCard;
 import br.com.finance.DigitalBank.entity.DebitCard;
@@ -31,9 +32,24 @@ public class CardController {
         return ResponseEntity.ok(cardService.findCardById(id));
     }
 
+    @GetMapping("/findAllCreditCard")
+    public ResponseEntity<List<CreditCardDto>> findAllCreditCard() {
+        return ResponseEntity.ok(cardService.findAllCreditCard());
+    }
+
     @PostMapping("/save")
     public ResponseEntity<CardDto> save(@RequestBody Card card) throws ExceptionMessage {
         return new ResponseEntity<>(cardService.saveCard(card), HttpStatus.CREATED);
+    }
+
+    @PostMapping("/saveCreditCard")
+    public ResponseEntity<CreditCard> generateCreditCard(@RequestBody CreditCard creditCard) throws ExceptionMessage {
+        return new ResponseEntity<>(cardService.generateCreditCard(creditCard), HttpStatus.CREATED);
+    }
+
+    @PostMapping("/saveDebitCard")
+    public ResponseEntity<DebitCard> generateCreditCard(@RequestBody DebitCard debitCard) throws ExceptionMessage {
+        return new ResponseEntity<>(cardService.generateDebitCard(debitCard), HttpStatus.CREATED);
     }
 
     @PutMapping("/replace/{id}")

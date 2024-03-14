@@ -1,6 +1,7 @@
 package br.com.finance.DigitalBank.service;
 
 import br.com.finance.DigitalBank.dto.CardDto;
+import br.com.finance.DigitalBank.dto.CreditCardDto;
 import br.com.finance.DigitalBank.entity.Card;
 import br.com.finance.DigitalBank.entity.Conta;
 import br.com.finance.DigitalBank.entity.CreditCard;
@@ -8,6 +9,7 @@ import br.com.finance.DigitalBank.entity.DebitCard;
 import br.com.finance.DigitalBank.exception.ExceptionMessage;
 import br.com.finance.DigitalBank.repository.CardRepository;
 import br.com.finance.DigitalBank.repository.ContaRepository;
+import br.com.finance.DigitalBank.repository.CreditCardRepository;
 import br.com.finance.DigitalBank.validation.PasswordDigitsValidation;
 import br.com.finance.DigitalBank.validation.RepeatPasswordValidation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +23,8 @@ import java.util.stream.Collectors;
 public class CardService {
     @Autowired
     private CardRepository cardRepository;
+    @Autowired
+    private CreditCardRepository creditCardRepository;
     @Autowired
     private ContaRepository contaRepository;
     @Autowired
@@ -46,6 +50,12 @@ public class CardService {
 
     }
 
+    public List<CreditCardDto> findAllCreditCard(){
+        List<CreditCard> creditCard = creditCardRepository.findAll();
+
+        return creditCard.stream().map(CreditCardDto::convertCardToDto).collect(Collectors.toList());
+    }
+
     public CardDto saveCard (Card card) throws ExceptionMessage {
         if (passwordDigitsValidation.passwordDigitsValidation(card.getPassword())) {
             throw new ExceptionMessage("A senha deve conter 8 dígitos ou mais");
@@ -53,6 +63,22 @@ public class CardService {
             cardRepository.save(card);
         }
         return CardDto.convertCardToDto(card);
+    }
+
+    public CreditCard generateCreditCard (CreditCard creditCard) throws ExceptionMessage{
+        if (passwordDigitsValidation.passwordDigitsValidation(creditCard.getPassword())) {
+            throw new ExceptionMessage("A senha deve conter 8 dígitos ou mais");
+        } else {
+           return cardRepository.save(creditCard);
+        }
+    }
+
+    public DebitCard generateDebitCard (DebitCard debitCard) throws ExceptionMessage{
+        if (passwordDigitsValidation.passwordDigitsValidation(debitCard.getPassword())) {
+            throw new ExceptionMessage("A senha deve conter 8 dígitos ou mais");
+        } else {
+            return cardRepository.save(debitCard);
+        }
     }
 
     public CardDto alterarSenha (Long id, Card card) throws ExceptionMessage {
