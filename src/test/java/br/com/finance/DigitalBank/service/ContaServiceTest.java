@@ -39,7 +39,15 @@ class ContaServiceTest {
         ContaDto contaDto = ContaDto.convertContaToDto(contaRepository.findContaById(1L));
 
         assertNotNull(contaDto);
+        assertEquals(1234, contaDto.getAgencia());
 
+    }
+
+    @Test
+    void getSaldo() {
+        BigDecimal saldoConta = contaRepository.findContaById(1L).getSaldo();
+
+        assertEquals(new BigDecimal(100), saldoConta);
     }
 
 
