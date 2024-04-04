@@ -1,5 +1,6 @@
 package br.com.finance.DigitalBank.util;
 
+import br.com.finance.DigitalBank.dto.ContaDto;
 import br.com.finance.DigitalBank.entity.Card;
 import br.com.finance.DigitalBank.entity.Client;
 import br.com.finance.DigitalBank.entity.Conta;
@@ -18,5 +19,17 @@ public class ContaCreator {
 
         return contas;
     }
+
+    public static Conta createContaAdd() {
+        Conta conta3 = new Conta();
+        conta3.setId_conta(3L);
+        conta3.setAgencia(5678);
+        conta3.setConta(8765);
+        conta3.setSaldo(new BigDecimal(50));
+
+        return conta3;
+    }
+
+
 
 }

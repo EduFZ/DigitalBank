@@ -1,5 +1,6 @@
 package br.com.finance.DigitalBank.service;
 
+import br.com.finance.DigitalBank.dto.ContaDto;
 import br.com.finance.DigitalBank.entity.Conta;
 import br.com.finance.DigitalBank.repository.ContaRepository;
 import br.com.finance.DigitalBank.util.ContaCreator;
@@ -29,6 +30,15 @@ class ContaServiceTest {
         Conta conta1 = ContaCreator.createConta();
 
         BDDMockito.given(contaRepository.findContaById(1L)).willReturn(conta1);
+
+    }
+
+    @Test
+    void findContaDto() {
+
+        ContaDto contaDto = ContaDto.convertContaToDto(contaRepository.findContaById(1L));
+
+        assertNotNull(contaDto);
 
     }
 
