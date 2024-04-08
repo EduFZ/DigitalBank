@@ -1,10 +1,8 @@
 package br.com.finance.DigitalBank.util;
 
+import br.com.finance.DigitalBank.api.TaxaRendApi;
 import br.com.finance.DigitalBank.dto.ContaDto;
-import br.com.finance.DigitalBank.entity.Card;
-import br.com.finance.DigitalBank.entity.Client;
-import br.com.finance.DigitalBank.entity.Conta;
-import br.com.finance.DigitalBank.entity.ContaCorrente;
+import br.com.finance.DigitalBank.entity.*;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -30,6 +28,17 @@ public class ContaCreator {
         contaCorrente.setTaxaMensal(new BigDecimal(12));
 
         return contaCorrente;
+    }
+
+    public static ContaPoupanca createContaPoupanca() {
+        ContaPoupanca contaPoupanca = new ContaPoupanca();
+        contaPoupanca.setId_conta(3L);
+        contaPoupanca.setAgencia(5678);
+        contaPoupanca.setConta(8765);
+        contaPoupanca.setSaldo(new BigDecimal(50));
+        contaPoupanca.setRendimento(new BigDecimal(String.valueOf(TaxaRendApi.getTaxaCdi())));
+
+        return contaPoupanca;
     }
 
 

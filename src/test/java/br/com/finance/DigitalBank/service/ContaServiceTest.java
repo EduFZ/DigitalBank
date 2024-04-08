@@ -1,8 +1,10 @@
 package br.com.finance.DigitalBank.service;
 
+import br.com.finance.DigitalBank.api.TaxaRendApi;
 import br.com.finance.DigitalBank.dto.ContaDto;
 import br.com.finance.DigitalBank.entity.Conta;
 import br.com.finance.DigitalBank.entity.ContaCorrente;
+import br.com.finance.DigitalBank.entity.ContaPoupanca;
 import br.com.finance.DigitalBank.repository.ContaRepository;
 import br.com.finance.DigitalBank.util.ContaCreator;
 import org.junit.jupiter.api.Assertions;
@@ -86,6 +88,19 @@ class ContaServiceTest {
 
         Mockito.verify(contaRepository, Mockito.times(1)).save(Mockito.any(ContaCorrente.class));
         assertEquals(3, contaCorrente.getId_conta());
+
+    }
+
+    @Test
+    void saveContaPoupanca() {
+
+        ContaPoupanca contaPoupanca = ContaCreator.createContaPoupanca();
+
+        contaService.saveContaPoupanca(contaPoupanca);
+
+        Mockito.verify(contaRepository, Mockito.times(1)).save(Mockito.any(ContaPoupanca.class));
+        assertEquals(3, contaPoupanca.getId_conta());
+        assertEquals(TaxaRendApi.getTaxaCdi(), contaPoupanca.getRendimento());
 
     }
 
