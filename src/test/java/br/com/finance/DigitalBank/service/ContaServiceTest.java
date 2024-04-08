@@ -2,6 +2,7 @@ package br.com.finance.DigitalBank.service;
 
 import br.com.finance.DigitalBank.dto.ContaDto;
 import br.com.finance.DigitalBank.entity.Conta;
+import br.com.finance.DigitalBank.entity.ContaCorrente;
 import br.com.finance.DigitalBank.repository.ContaRepository;
 import br.com.finance.DigitalBank.util.ContaCreator;
 import org.junit.jupiter.api.Assertions;
@@ -27,14 +28,12 @@ class ContaServiceTest {
 
     @BeforeEach
     void setUp() {
-        Conta conta1 = ContaCreator.createConta();
-
-        BDDMockito.given(contaRepository.findContaById(1L)).willReturn(conta1);
 
     }
 
     @Test
     void findContaDto() {
+        BDDMockito.given(contaRepository.findContaById(1L)).willReturn(ContaCreator.createConta());
 
         ContaDto contaDto = ContaDto.convertContaToDto(contaRepository.findContaById(1L));
 
@@ -45,6 +44,8 @@ class ContaServiceTest {
 
     @Test
     void getSaldo() {
+        BDDMockito.given(contaRepository.findContaById(1L)).willReturn(ContaCreator.createConta());
+
         BigDecimal saldoConta = contaRepository.findContaById(1L).getSaldo();
 
         assertEquals(new BigDecimal(100), saldoConta);
@@ -53,6 +54,7 @@ class ContaServiceTest {
 
     @Test
     void realizarTransferenciaPixEntreContas() {
+        BDDMockito.given(contaRepository.findContaById(1L)).willReturn(ContaCreator.createConta());
 
         Conta conta2 = new Conta();
         conta2.setId_conta(2L);
@@ -73,6 +75,17 @@ class ContaServiceTest {
         Assertions.assertNotEquals(saldo1Bef, saldo1Aft);
         Assertions.assertNotEquals(saldo2Bef, saldo2Aft);
 
+    }
+
+    @Test
+    void saveContaCorrente() {
+
+        ContaCorrente contaCorrente = ContaCreator.createContaCorrente();
+
+        contaService.saveContaCorrente(contaCorrente);
+
+        Mockito.verify(contaRepository, Mockito.times(1)).save(Mockito.any(ContaCorrente.class));
+        assertEquals(3, contaCorrente.getId_conta());
 
     }
 

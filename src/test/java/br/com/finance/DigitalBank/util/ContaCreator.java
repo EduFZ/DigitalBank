@@ -4,6 +4,7 @@ import br.com.finance.DigitalBank.dto.ContaDto;
 import br.com.finance.DigitalBank.entity.Card;
 import br.com.finance.DigitalBank.entity.Client;
 import br.com.finance.DigitalBank.entity.Conta;
+import br.com.finance.DigitalBank.entity.ContaCorrente;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -20,14 +21,15 @@ public class ContaCreator {
         return contas;
     }
 
-    public static Conta createContaAdd() {
-        Conta conta3 = new Conta();
-        conta3.setId_conta(3L);
-        conta3.setAgencia(5678);
-        conta3.setConta(8765);
-        conta3.setSaldo(new BigDecimal(50));
+    public static ContaCorrente createContaCorrente() {
+        ContaCorrente contaCorrente = new ContaCorrente();
+        contaCorrente.setId_conta(3L);
+        contaCorrente.setAgencia(5678);
+        contaCorrente.setConta(8765);
+        contaCorrente.setSaldo(new BigDecimal(50));
+        contaCorrente.setTaxaMensal(new BigDecimal(12));
 
-        return conta3;
+        return contaCorrente;
     }
 
 
