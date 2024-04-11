@@ -86,7 +86,8 @@ class ContaServiceTest {
 
         contaService.saveContaCorrente(contaCorrente);
 
-        Mockito.verify(contaRepository, Mockito.times(1)).save(Mockito.any(ContaCorrente.class));
+        Mockito.verify(contaRepository, Mockito.times(1)).save(Mockito.any(ContaCorrente.class)); // Verifica se o método save() foi chamado.
+        BDDMockito.then(contaRepository).should().save(contaCorrente); // Verifica se o método save() foi chamado.
         assertEquals(3, contaCorrente.getId_conta());
 
     }
