@@ -36,6 +36,7 @@ public class SeguroCardService {
         if (seguroCard.getDataContrat().equals(0) || seguroCard.getDataContrat().getMonth() != LocalDate.now().getMonth()
         && seguroCard.getDataContrat().getDayOfMonth() == LocalDate.now().getDayOfMonth()) {
             conta.setSaldo(conta.getSaldo().subtract(seguroCard.getValor()));
+            contaRepository.save(conta);
         }
 
         seguroCard.setCredit_card(creditCard);
@@ -49,7 +50,7 @@ public class SeguroCardService {
 
         apoliceSeguroRepository.save(apoliceSeguro);
         seguroCardRepository.save(seguroCard);
-        contaRepository.save(conta);
+
 
         return seguroCard;
     }
