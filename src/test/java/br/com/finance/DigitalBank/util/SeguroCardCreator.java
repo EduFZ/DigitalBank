@@ -14,7 +14,7 @@ public class SeguroCardCreator {
         seguroCard.setDescricao("Seguro do Cartão");
         seguroCard.setActive(true);
         seguroCard.setCredit_card(CardCreator.generateCreditCard());
-        seguroCard.setDataContrat(LocalDate.of(2024, 02, 12));
+        seguroCard.setDataContrat(LocalDate.of(2024, 02, 16));
 
         return seguroCard;
     }

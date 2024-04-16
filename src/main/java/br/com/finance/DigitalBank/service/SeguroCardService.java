@@ -5,10 +5,7 @@ import br.com.finance.DigitalBank.entity.Conta;
 import br.com.finance.DigitalBank.entity.CreditCard;
 import br.com.finance.DigitalBank.entity.SeguroCard;
 import br.com.finance.DigitalBank.exception.ExceptionMessage;
-import br.com.finance.DigitalBank.repository.ApoliceSeguroRepository;
-import br.com.finance.DigitalBank.repository.ContaRepository;
-import br.com.finance.DigitalBank.repository.CreditCardRepository;
-import br.com.finance.DigitalBank.repository.SeguroCardRepository;
+import br.com.finance.DigitalBank.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -26,11 +23,12 @@ public class SeguroCardService {
     private ApoliceSeguroRepository apoliceSeguroRepository;
     @Autowired
     private ContaRepository contaRepository;
+    @Autowired
+    private CardRepository cardRepository;
 
 
     public SeguroCard contratarSeguro(Long idCard, SeguroCard seguroCard) throws ExceptionMessage {
-        Optional<CreditCard> optionalCreditCard = creditCardRepository.findById(idCard);
-        CreditCard creditCard = optionalCreditCard.orElseThrow(() -> new ExceptionMessage("Cartão não encontrado!"));
+        CreditCard creditCard = (CreditCard) cardRepository.findCardById(idCard);
         Conta conta = creditCard.getConta();
 
         if (seguroCard.getDataContrat().equals(0) || seguroCard.getDataContrat().getMonth() != LocalDate.now().getMonth()
@@ -48,6 +46,7 @@ public class SeguroCardService {
 
         seguroCard.setApoliceSeguro(apoliceSeguro);
 
+        contaRepository.save(conta);
         apoliceSeguroRepository.save(apoliceSeguro);
         seguroCardRepository.save(seguroCard);
 
