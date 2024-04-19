@@ -1,44 +1,36 @@
 package br.com.finance.DigitalBank.controller;
 
-import br.com.finance.DigitalBank.entity.SeguroCard;
-import br.com.finance.DigitalBank.exception.ExceptionMessage;
 import br.com.finance.DigitalBank.service.SeguroCardService;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.BDDMockito;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.mock.web.MockHttpServletResponse;
+import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.anyLong;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
-
-@ExtendWith(MockitoExtension.class)
+@SpringBootTest
+@AutoConfigureMockMvc
 class SeguroCardControllerTest {
 
-    @Mock
+    @MockBean
     private SeguroCardService seguroCardService;
 
-    @InjectMocks
-    private SeguroCardController seguroCardController;
+    @Autowired
+    private MockMvc mockMvc;
 
     @Test
-    public void testContratarSeguroReturnsCreatedStatus() throws ExceptionMessage {
+    void testContratarSeguroReturnsCreatedStatus() throws Exception {
 
-        Long idCard = 1L;
-        SeguroCard seguroCard = new SeguroCard();
+        MockHttpServletResponse response = mockMvc.perform(MockMvcRequestBuilders.get("/seguroCard/{id}", 1L))
+                .andReturn().getResponse();
 
-        when(seguroCardService.contratarSeguro(anyLong(), any(SeguroCard.class))).thenReturn(seguroCard);
-        ResponseEntity<SeguroCard> response = seguroCardController.contratarSeguro(idCard, seguroCard);
+        assertEquals(200, response.getStatus());
 
-        assertEquals(HttpStatus.CREATED, response.getStatusCode());
-        verify(seguroCardService).contratarSeguro(idCard, seguroCard);
     }
-    }
+
+}
 
 

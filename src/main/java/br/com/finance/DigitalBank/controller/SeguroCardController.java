@@ -14,7 +14,7 @@ public class SeguroCardController {
     @Autowired
     private SeguroCardService seguroCardService;
 
-    @GetMapping("/{id}")
+    @GetMapping("/{idCard}")
     public ResponseEntity<SeguroCard> findSeguroById(@PathVariable Long idCard) {
         return ResponseEntity.ok(seguroCardService.findSeguroById(idCard));
     }
