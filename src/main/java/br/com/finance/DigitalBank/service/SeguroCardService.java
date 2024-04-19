@@ -27,15 +27,17 @@ public class SeguroCardService {
     private CardRepository cardRepository;
 
 
+    public SeguroCard findSeguroById(Long idSeguro) {
+        SeguroCard seguroCard = seguroCardRepository.findById(idSeguro).orElseThrow(() -> new RuntimeException("Seguro do Cartão não encontrado"));
+        verifyTaxa(seguroCard);
+        return seguroCard;
+    }
+
     public SeguroCard contratarSeguro(Long idCard, SeguroCard seguroCard) throws ExceptionMessage {
         CreditCard creditCard = (CreditCard) cardRepository.findCardById(idCard);
         Conta conta = creditCard.getConta();
 
-        if (seguroCard.getDataContrat().equals(0) || seguroCard.getDataContrat().getMonth() != LocalDate.now().getMonth()
-        && seguroCard.getDataContrat().getDayOfMonth() == LocalDate.now().getDayOfMonth()) {
-            conta.setSaldo(conta.getSaldo().subtract(seguroCard.getValor()));
-            contaRepository.save(conta);
-        }
+        verifyTaxa(seguroCard);
 
         seguroCard.setCredit_card(creditCard);
 
@@ -52,6 +54,18 @@ public class SeguroCardService {
 
 
         return seguroCard;
+    }
+
+    public void verifyTaxa(SeguroCard seguroCard) {
+        LocalDate dataSeguro = seguroCard.getDataContrat();
+        Conta conta = seguroCard.getCredit_card().getConta();
+
+        if (seguroCard.getDataContrat().equals(0) || dataSeguro.getMonth() != LocalDate.now().getMonth()
+                && dataSeguro.getDayOfMonth() == LocalDate.now().getDayOfMonth()) {
+            conta.setSaldo(conta.getSaldo().subtract(seguroCard.getValor()));
+            contaRepository.save(conta);
+        }
+
     }
 
 
