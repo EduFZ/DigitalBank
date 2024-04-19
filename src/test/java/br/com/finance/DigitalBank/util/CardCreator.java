@@ -10,7 +10,7 @@ public class CardCreator {
 
     public static CreditCard generateCreditCard() {
         CreditCard creditCard = new CreditCard();
-        creditCard.setId_card(1L);
+        creditCard.setId_card(2L);
         creditCard.setPassword("abc123");
         creditCard.setTax(new BigDecimal("10"));
         creditCard.setActive(true);

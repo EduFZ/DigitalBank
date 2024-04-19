@@ -9,7 +9,7 @@ public class SeguroCardCreator {
 
     public static SeguroCard generateSeguroCard() {
         SeguroCard seguroCard = new SeguroCard();
-        seguroCard.setId(1L);
+        seguroCard.setId(2L);
         seguroCard.setValor(new BigDecimal("8"));
         seguroCard.setDescricao("Seguro do Cartão");
         seguroCard.setActive(true);

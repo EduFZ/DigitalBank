@@ -60,7 +60,7 @@ public class SeguroCardService {
         LocalDate dataSeguro = seguroCard.getDataContrat();
         Conta conta = seguroCard.getCredit_card().getConta();
 
-        if (seguroCard.getDataContrat().equals(0) || dataSeguro.getMonth() != LocalDate.now().getMonth()
+        if (seguroCard.getDataContrat() == null || dataSeguro.getMonth() != LocalDate.now().getMonth()
                 && dataSeguro.getDayOfMonth() == LocalDate.now().getDayOfMonth()) {
             conta.setSaldo(conta.getSaldo().subtract(seguroCard.getValor()));
             contaRepository.save(conta);

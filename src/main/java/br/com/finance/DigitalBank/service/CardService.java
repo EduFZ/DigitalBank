@@ -79,7 +79,7 @@ public class CardService {
     }
 
     public DebitCard generateDebitCard (DebitCard debitCard) throws ExceptionMessage{
-        if (debitCard.getConta().equals(true)) {
+        if (debitCard.getConta() != null) {
             if (passwordDigitsValidation.passwordDigitsValidation(debitCard.getPassword())) {
                 throw new ExceptionMessage("A senha deve conter 8 dígitos ou mais");
             } else {

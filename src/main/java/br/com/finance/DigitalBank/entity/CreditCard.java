@@ -25,7 +25,6 @@ public class CreditCard extends Card{
     @OneToOne(mappedBy = "credit_card")
     private SeguroCard seguroCard;
 
-
     public void resetLimitMonth() {
         LocalDate today = LocalDate.now();
         if (getVencMes() == null || getVencMes().getMonth() != today.getMonth()) {
