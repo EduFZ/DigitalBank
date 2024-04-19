@@ -11,7 +11,7 @@ public class ContaCreator {
 
     public static Conta createConta() {
         Conta contas = new Conta();
-        contas.setId_conta(2L);
+        contas.setId_conta(1L);
         contas.setAgencia(1234);
         contas.setConta(4321);
         contas.setSaldo(new BigDecimal(100));
@@ -21,7 +21,7 @@ public class ContaCreator {
 
     public static ContaCorrente createContaCorrente() {
         ContaCorrente contaCorrente = new ContaCorrente();
-        contaCorrente.setId_conta(3L);
+        contaCorrente.setId_conta(2L);
         contaCorrente.setAgencia(5678);
         contaCorrente.setConta(8765);
         contaCorrente.setSaldo(new BigDecimal(50));

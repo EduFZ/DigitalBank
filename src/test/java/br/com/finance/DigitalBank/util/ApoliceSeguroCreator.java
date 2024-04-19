@@ -7,7 +7,7 @@ public class ApoliceSeguroCreator {
     public static ApoliceSeguro generateApoliceSeguro() {
 
         ApoliceSeguro apoliceSeguro = new ApoliceSeguro();
-        apoliceSeguro.setIdApolice(2L);
+        apoliceSeguro.setIdApolice(1L);
         apoliceSeguro.setDataContratacao(SeguroCardCreator.generateSeguroCard().getDataContrat());
         apoliceSeguro.setNumeroApolice(12345L);
         apoliceSeguro.setCreditCard(CardCreator.generateCreditCard());

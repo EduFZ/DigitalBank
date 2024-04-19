@@ -8,6 +8,17 @@ import java.time.LocalDate;
 
 public class CardCreator {
 
+    public static Card generateCard() {
+        Card card = new Card();
+        card.setId_card(1L);
+        card.setPassword("abc123");
+        card.setTax(new BigDecimal("10"));
+        card.setActive(true);
+        card.setConta(ContaCreator.createConta());
+
+        return card;
+    }
+
     public static CreditCard generateCreditCard() {
         CreditCard creditCard = new CreditCard();
         creditCard.setId_card(2L);
