@@ -4,13 +4,18 @@ import br.com.finance.DigitalBank.dto.CardDto;
 import br.com.finance.DigitalBank.dto.CreditCardDto;
 import br.com.finance.DigitalBank.entity.Card;
 import br.com.finance.DigitalBank.entity.CreditCard;
+import br.com.finance.DigitalBank.exception.ExceptionMessage;
 import br.com.finance.DigitalBank.repository.CardRepository;
 import br.com.finance.DigitalBank.repository.ContaRepository;
 import br.com.finance.DigitalBank.repository.CreditCardRepository;
 import br.com.finance.DigitalBank.util.CardCreator;
+import br.com.finance.DigitalBank.validation.PasswordDigitsValidation;
+import br.com.finance.DigitalBank.validation.RepeatPasswordValidation;
+import com.mysql.cj.exceptions.PasswordExpiredException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.ArgumentMatchers;
 import org.mockito.BDDMockito;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
@@ -32,6 +37,10 @@ class CardServiceTest {
     private CreditCardRepository creditCardRepository;
     @Mock
     private ContaRepository contaRepository;
+    @Mock
+    private RepeatPasswordValidation repeatPasswordValidation;
+    @Mock
+    private PasswordDigitsValidation passwordDigitsValidation;
 
     @Test
     void shoulReturnListOfCardWhithFindAllCard() {
@@ -70,6 +79,31 @@ class CardServiceTest {
 
         Assertions.assertNotNull(allCreditCards);
         assertEquals(2L, allCreditCards.get(0).getId_card());
+
+    }
+
+    @Test
+    void shoulReturnCardDtoWithSaveCard() throws ExceptionMessage {
+        Card card = CardCreator.generateCard();
+
+        BDDMockito.given(cardRepository.save(card)).willReturn(card);
+
+        CardDto cardDto = cardService.saveCard(card);
+
+        assertEquals(card.getId_card(), cardDto.getId_card());
+
+    }
+
+    @Test
+    void shouldThrowExceptionWhenPasswordDigitsIsInvalid() throws ExceptionMessage {
+        Card card = CardCreator.generateCard();
+        card.setPassword("1234567");
+
+        BDDMockito.given(passwordDigitsValidation.passwordDigitsValidation(ArgumentMatchers.argThat(s -> s.length() <= 7)))
+                .willReturn(true);
+
+        ExceptionMessage exceptionMessage = assertThrows(ExceptionMessage.class, () -> cardService.saveCard(card));
+        assertEquals("A senha deve conter 8 dígitos ou mais", exceptionMessage.getMessage());
 
     }
 
